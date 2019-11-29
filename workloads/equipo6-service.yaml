@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: app-${OWNER}
+  name: app-mars13
   labels:
-    app: app-${OWNER}
+    app: app-mars13
 spec:
   type: ClusterIP
   ports:
   - port: 80
     targetPort: 8080
   selector:
-    app: app-${OWNER}
+    app: app-mars13
