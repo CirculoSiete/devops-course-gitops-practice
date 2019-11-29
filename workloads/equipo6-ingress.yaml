@@ -1,16 +1,16 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: app-${OWNER}
+  name: app-mars13
   annotations:
     kubernetes.io/ingress.class: nginx
     #En este cluster no tenemos SSL, lo deshabilitamos
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
-  - host: app-${OWNER}.${HOST_IP}.nip.io
+  - host: app-mars13.45.55.104.239.nip.io
     http:
       paths:
       - backend:
-          serviceName: app-${OWNER}
+          serviceName: app-mars13
           servicePort: 80

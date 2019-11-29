@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-${OWNER}
+  name: app-mars13
   labels:
-    app: app-${OWNER}
+    app: app-mars13
 spec:
   selector:
     matchLabels:
-      app: app-${OWNER}
+      app: app-mars13
   replicas: 1
   template:
     metadata:
       labels:
-        app: app-${OWNER}
+        app: app-mars13
     spec:
       containers:
       - name: app
-        image: ${OWNER}/miapp-equipo06:${TAG}
+        image: mars13/miapp-equipo06:0.0.2
         resources:
           requests:
             cpu: 250m
