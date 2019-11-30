@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-equipo2
+  labels:
+    app: app-equipo2
+spec:
+  selector:
+    matchLabels:
+      app: app-equipo2
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: app-equipo2
+    spec:
+      containers:
+      - name: app
+        image: hugomprado/equipo02:1.0.0
+        resources:
+          requests:
+            cpu: 250m
+            memory: 256Mi
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+            #cuantos segundos espera para empezar a verificar
+          initialDelaySeconds: 10
+          timeoutSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 20
+          timeoutSeconds: 5
