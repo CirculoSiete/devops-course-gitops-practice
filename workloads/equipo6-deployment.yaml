@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-equipo-06
+  labels:
+    app: app-equipo-06
+spec:
+  selector:
+    matchLabels:
+      app: app-equipo-06
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: app-equipo-06
+    spec:
+      containers:
+      - name: app
+        image: mars13/miapp-equipo06:0.0.2
+        resources:
+          requests:
+            cpu: 250m
+            memory: 256Mi
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /version
+            port: 8080
+            #cuantos segundos espera para empezar a verificar
+          initialDelaySeconds: 10
+          timeoutSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 20
+          timeoutSeconds: 5
