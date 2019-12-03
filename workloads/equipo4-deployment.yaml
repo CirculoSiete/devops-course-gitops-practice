@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: ncamposopenlegacy/equipo04:1.0.0
+        image: ncamposopenlegacy/clase4_practica4:0.0.1-snapshot
         resources:
           requests:
             cpu: 250m
