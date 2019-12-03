@@ -18,16 +18,5 @@ metadata:
               cpu: 250m
               memory: 256Mi
             ports:
-            - containerPort: 8080
-            readinessProbe:
-              httpGet:
-                path: /
-                port: 8080
-              initialDelaySeconds: 10
-              timeoutSeconds: 5
-            livenessProbe:
-              httpGet:
-                path: /
-                port: 8080
-              initialDelaySeconds: 20
-              timeoutSeconds: 5
+            - containerPort: 8080           
+
