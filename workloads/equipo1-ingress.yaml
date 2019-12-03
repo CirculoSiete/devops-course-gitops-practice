@@ -1,0 +1,16 @@
+apiversion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: app-equipo1
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    #No se tiene ssl configurado, es necesario deshabilitarlo
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - host: app-equipo1.45.55.104.239.nip.io
+    http:
+      paths:
+      - backend:
+          serviceName: app-equipo1
+          servicePort: 80

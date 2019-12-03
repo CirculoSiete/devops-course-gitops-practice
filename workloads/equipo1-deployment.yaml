@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: app-equipo1
+  labels: 
+    app: app-equipo1
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: app-equipo1
+      spec:
+        containers:
+        - name: app
+          image: lperezh/calculadora-app:0.0.4
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            ports:
+            - containerPort: 8080
+            readinessProbe:
+              httpGet:
+                path: /
+                port: 8080
+              initialDelaySeconds: 10
+              timeoutSeconds: 5
+            livenessProbe:
+              httpGet:
+                path: /
+                port: 8080
+              initialDelaySeconds: 20
+              timeoutSeconds: 5
