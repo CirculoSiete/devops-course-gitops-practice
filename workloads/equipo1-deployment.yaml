@@ -1,22 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata: 
+metadata:
   name: app-equipo1
-  labels: 
+  labels:
     app: app-equipo1
-  replicas: 2
+spec:
+  selector:
+    matchLabels:
+      app: app-equipo1
+  replicas: 1
   template:
     metadata:
       labels:
         app: app-equipo1
-      spec:
-        containers:
-        - name: app
-          image: lperezh/calculadora-app:0.0.4
-          resources:
-            requests:
-              cpu: 250m
-              memory: 256Mi
-            ports:
-            - containerPort: 8080           
-
+    spec:
+      containers:
+      - name: app
+        image: lperezh/calculadora-app:0.0.4
+        resources:
+          requests:
+            cpu: 250m
+            memory: 256Mi
+        ports:
+        - containerPort: 8080

@@ -1,10 +1,10 @@
-apiversion: extensions/v1beta1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: app-equipo1
   annotations:
     kubernetes.io/ingress.class: nginx
-    #No se tiene ssl configurado, es necesario deshabilitarlo
+    #En este cluster no tenemos SSL, lo deshabilitamos
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
