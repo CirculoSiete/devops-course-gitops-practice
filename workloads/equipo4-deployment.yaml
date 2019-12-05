@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: ncamposopenlegacy/clase4_practica4:0.0.1-snapshot
+        image: juliocesarvc/calculadora-team4:0.0.3
         resources:
           requests:
             cpu: 250m
@@ -25,14 +25,14 @@ spec:
         - containerPort: 8080
         readinessProbe:
           httpGet:
-            path: /
+            path: /v1/calc/
             port: 8080
             #cuantos segundos espera para empezar a verificar
           initialDelaySeconds: 10
           timeoutSeconds: 5
         livenessProbe:
           httpGet:
-            path: /
+            path: /actuator/health
             port: 8080
           initialDelaySeconds: 20
           timeoutSeconds: 5
