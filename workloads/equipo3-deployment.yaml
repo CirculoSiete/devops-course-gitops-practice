@@ -4,6 +4,10 @@ metadata:
   name: app-equipo3
   labels:
     app: app-equipo3
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/path: '/actuator/prometheus'
+    prometheus.io/port: '8080'
 spec:
   selector:
     matchLabels:
@@ -23,3 +27,16 @@ spec:
             memory: 256Mi
         ports:
         - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+            #cuantos segundos espera para empezar a verificar
+          initialDelaySeconds: 15
+          timeoutSeconds: 1
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 15
+          timeoutSeconds: 1
