@@ -39,4 +39,4 @@ spec:
             path: /actuator/health
             port: 8080
           initialDelaySeconds: 15
-          timeoutSeconds: 1 
+          timeoutSeconds: 1
