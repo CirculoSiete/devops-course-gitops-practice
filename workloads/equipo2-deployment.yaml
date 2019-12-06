@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: hugomprado/equipo02:1.0.0
+        image: hugomprado/equipo02:1.0.1
         resources:
           requests:
             cpu: 250m
