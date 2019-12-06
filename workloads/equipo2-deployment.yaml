@@ -25,14 +25,14 @@ spec:
         - containerPort: 8080
         readinessProbe:
           httpGet:
-            path: /
+            path: /actuator/health
             port: 8080
             #cuantos segundos espera para empezar a verificar
           initialDelaySeconds: 10
           timeoutSeconds: 5
         livenessProbe:
           httpGet:
-            path: /
+            path: /actuator/health
             port: 8080
           initialDelaySeconds: 20
           timeoutSeconds: 5
