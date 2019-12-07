@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-ecommerce-equipo3
+  labels:
+    app: app-ecommerce-equipo3
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+      app: app-ecommerce-equipo3
