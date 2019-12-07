@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: ncamposopenlegacy/ecommerceweb:0.0.1-RC
+        image: ncamposopenlegacy/ecomerceweb:0.0.1-snapshot_1
         env:
           - name: ADMIN_USERNAME
             valueFrom:
