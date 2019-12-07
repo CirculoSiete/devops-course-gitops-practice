@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: app-ecommerce
+  namespace: devops1
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    #En este cluster no tenemos SSL, lo deshabilitamos
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - host: devops1.45.55.104.239.nip.io
+    http:
+      paths:
+      - backend:
+          serviceName: app-ecommerce
+          servicePort: 80

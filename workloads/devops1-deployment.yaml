@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-ecomerce
+  namespace: devops1
+  labels:
+    app: app-ecommerce
+spec:
+  selector:
+    matchLabels:
+      app: app-ecommerce
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: app-ecommerce
+    spec:
+      containers:
+      - name: app
+        image: ncamposopenlegacy/ecommerceweb:0.0.1-RC
+        env:
+          - name: ADMIN_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: app-credentials
+                key: username
+          - name: ADMIN_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: app-credentials
+                key: password
+          - name: SPRING_DATASOURCE_USER
+            valueFrom:
+              secretKeyRef:
+                name: db-credentials
+                key: username
+          - name: SPRING_DATASOURCE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: db-credentials
+                key: password
+          - name: SPRING_DATASOURCE_URL
+            valueFrom:
+              configMapKeyRef:
+                name: application-values
+                key: url-db-connection
+        resources:
+          requests:
+            cpu: 250m
+            memory: 250Mi
+          limits:
+            cpu: 310m
+            memory: 500Mi
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 10
+          timeoutSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 20
+          timeoutSeconds: 5
