@@ -5,6 +5,10 @@ metadata:
   namespace: devops1
   labels:
     app: app-ecommerce
+  annotations:
+    fluxcd.io/automated: "true"
+    fluxcd.io/tag.init: regex:^3.10.*
+    fluxcd.io/tag.podinfod: semver:~2.1
 spec:
   selector:
     matchLabels:
@@ -59,23 +63,20 @@ spec:
                 name: application-values
                 key: admin_lastname
         resources:
-          requests:
-            cpu: 250m
-            memory: 250Mi
           limits:
             cpu: 310m
-            memory: 500Mi
+            memory: 450Mi
         ports:
         - containerPort: 8080
         readinessProbe:
           httpGet:
             path: /actuator/health
             port: 8080
-          initialDelaySeconds: 10
-          timeoutSeconds: 5
+          initialDelaySeconds: 40
+          timeoutSeconds: 15
         livenessProbe:
           httpGet:
             path: /actuator/health
             port: 8080
-          initialDelaySeconds: 20
-          timeoutSeconds: 5
+          initialDelaySeconds: 50
+          timeoutSeconds: 15
