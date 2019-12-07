@@ -64,7 +64,7 @@ spec:
                 key: admin_lastname
         resources:
           limits:
-            cpu: 310m
+            cpu: 400m
             memory: 450Mi
         ports:
         - containerPort: 8080
@@ -73,10 +73,12 @@ spec:
             path: /actuator/health
             port: 8080
           initialDelaySeconds: 40
-          timeoutSeconds: 15
+          timeoutSeconds: 2
+          periodSeconds: 15
         livenessProbe:
           httpGet:
             path: /actuator/health
             port: 8080
           initialDelaySeconds: 50
-          timeoutSeconds: 15
+          timeoutSeconds: 2
+          periodSeconds: 15
