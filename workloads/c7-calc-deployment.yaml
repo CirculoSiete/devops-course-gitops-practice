@@ -4,6 +4,10 @@ metadata:
   name: c7-calc
   labels:
     app: c7-calc
+  annotations:
+    fluxcd.io/automated: "true"
+    fluxcd.io/tag.init: regex:^3.10.*
+    fluxcd.io/tag.podinfod: semver:~2.1
 spec:
   selector:
     matchLabels:
