@@ -5,6 +5,10 @@ metadata:
   namespace: devops2
   labels:
     app: team2-ecommerce
+  annotations:
+    fluxcd.io/automated: "true"
+    fluxcd.io/tag.init: regex:^3.10.*
+    fluxcd.io/tag.podinfod: semver:~2.1
 spec:
   selector:
     matchLabels:
@@ -18,13 +22,10 @@ spec:
         prometheus.io/scrape: 'true'
         prometheus.io/path: '/actuator/prometheus'
         prometheus.io/port: '8080'
-        fluxcd.io/automated: "true"
-        fluxcd.io/tag.init: regex:^3.10.*
-        fluxcd.io/tag.podinfod: semver:~2.1
     spec:
       containers:
         - name: team2
-          image: juliocesarvc/team2-ecommerce:${TAG}
+          image: juliocesarvc/team2-ecommerce:0.0.1
           resources:
             requests:
               cpu: 250m
