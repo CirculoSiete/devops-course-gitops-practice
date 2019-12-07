@@ -5,3 +5,5 @@ metadata:
  namespace: devops1
 data:
  url-db-connection: "jdbc:postgresql://pgdb-postgresql.devops1.svc.cluster.local:5432/postgres"
+ admin_username: "ADMINISTRADOR"
+ admin_lastname: "UNICO"

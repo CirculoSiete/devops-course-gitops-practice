@@ -44,6 +44,16 @@ spec:
               configMapKeyRef:
                 name: application-values
                 key: url-db-connection
+          - name: ADMIN_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: application-values
+                key: admin_username
+          - name: ADMIN_LASTNAME
+            valueFrom:
+              configMapKeyRef:
+                name: application-values
+                key: admin_lastname
         resources:
           requests:
             cpu: 250m
