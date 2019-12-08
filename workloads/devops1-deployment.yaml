@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -5,6 +6,10 @@ metadata:
   namespace: devops1
   labels:
     app: app-ecommerce
+  annotations:
+    fluxcd.io/automated: "true"
+    fluxcd.io/tag.init: regex:^3.10.*
+    fluxcd.io/tag.podinfod: semver:~2.1
 spec:
   selector:
     matchLabels:
@@ -21,61 +26,60 @@ spec:
     spec:
       containers:
       - name: app
-        image: ncamposopenlegacy/ecomerceweb:0.0.1-snapshot_1
+        image: ncamposopenlegacy/ecomerceweb:0.0.5-RC
         env:
-          - name: ADMIN_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: app-credentials
-                key: username
-          - name: ADMIN_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: app-credentials
-                key: password
-          - name: SPRING_DATASOURCE_USER
-            valueFrom:
-              secretKeyRef:
-                name: db-credentials
-                key: username
-          - name: SPRING_DATASOURCE_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: db-credentials
-                key: password
-          - name: SPRING_DATASOURCE_URL
-            valueFrom:
-              configMapKeyRef:
-                name: application-values
-                key: url-db-connection
-          - name: ADMIN_NAME
-            valueFrom:
-              configMapKeyRef:
-                name: application-values
-                key: admin_username
-          - name: ADMIN_LASTNAME
-            valueFrom:
-              configMapKeyRef:
-                name: application-values
-                key: admin_lastname
+        - name: ADMIN_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: app-credentials
+              key: username
+        - name: ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-credentials
+              key: password
+        - name: SPRING_DATASOURCE_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: username
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: password
+        - name: SPRING_DATASOURCE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: application-values
+              key: url-db-connection
+        - name: ADMIN_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: application-values
+              key: admin_username
+        - name: ADMIN_LASTNAME
+          valueFrom:
+            configMapKeyRef:
+              name: application-values
+              key: admin_lastname
         resources:
-          requests:
-            cpu: 250m
-            memory: 250Mi
           limits:
-            cpu: 310m
-            memory: 500Mi
+            cpu: 400m
+            memory: 450Mi
         ports:
         - containerPort: 8080
         readinessProbe:
           httpGet:
             path: /actuator/health
             port: 8080
-          initialDelaySeconds: 10
-          timeoutSeconds: 5
+          initialDelaySeconds: 40
+          timeoutSeconds: 2
+          periodSeconds: 15
         livenessProbe:
           httpGet:
             path: /actuator/health
             port: 8080
-          initialDelaySeconds: 20
-          timeoutSeconds: 5
+          initialDelaySeconds: 50
+          timeoutSeconds: 2
+          periodSeconds: 15

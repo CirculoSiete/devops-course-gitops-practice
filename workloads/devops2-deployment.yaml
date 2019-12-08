@@ -2,9 +2,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: c7-calc
+  name: team2-ecommerce
+  namespace: devops2
   labels:
-    app: c7-calc
+    app: team2-ecommerce
   annotations:
     fluxcd.io/automated: "true"
     fluxcd.io/tag.init: regex:^3.10.*
@@ -12,37 +13,37 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: c7-calc
+      app: team2-ecommerce
   replicas: 1
   template:
     metadata:
       labels:
-        app: c7-calc
+        app: team2-ecommerce
       annotations:
-        # Estas anotaciones activan el monitoreo automatico con Prometheus
         prometheus.io/scrape: 'true'
         prometheus.io/path: '/actuator/prometheus'
         prometheus.io/port: '8080'
     spec:
       containers:
-      - name: app
-        image: circulo7/devops-calc:0.0.2
+      - name: team2
+        image: juliocesarvc/team2-ecommerce:0.0.2
         resources:
-          limits:
+          requests:
             cpu: 400m
-            memory: 256Mi
+            memory: 450Mi
         ports:
         - containerPort: 8080
         readinessProbe:
           httpGet:
             path: /actuator/health
             port: 8080
-              #cuantos segundos espera para empezar a verificar
           initialDelaySeconds: 40
-          timeoutSeconds: 1
+          timeoutSeconds: 5
+          periodSeconds: 15
         livenessProbe:
           httpGet:
             path: /actuator/health
             port: 8080
-          initialDelaySeconds: 60
-          timeoutSeconds: 1
+          initialDelaySeconds: 50
+          timeoutSeconds: 5
+          periodSeconds: 15
