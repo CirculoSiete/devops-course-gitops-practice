@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -24,25 +25,25 @@ spec:
         prometheus.io/port: '8080'
     spec:
       containers:
-        - name: team2
-          image: juliocesarvc/team2-ecommerce:0.0.1
-          resources:
-            requests:
-              cpu: 400m
-              memory: 450Mi
-          ports:
-          - containerPort: 8080
-          readinessProbe:
-            httpGet:
-              path: /actuator/health
-              port: 8080
-            initialDelaySeconds: 40
-            timeoutSeconds: 5
-            periodSeconds: 15
-          livenessProbe:
-            httpGet:
-              path: /actuator/health
-              port: 8080
-            initialDelaySeconds: 50
-            timeoutSeconds: 5
-            periodSeconds: 15
+      - name: team2
+        image: juliocesarvc/team2-ecommerce:0.0.2
+        resources:
+          requests:
+            cpu: 400m
+            memory: 450Mi
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 40
+          timeoutSeconds: 5
+          periodSeconds: 15
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 50
+          timeoutSeconds: 5
+          periodSeconds: 15
