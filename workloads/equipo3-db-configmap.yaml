@@ -4,4 +4,4 @@ metadata:
   name: application-values
   namespace: default
 data:
-  url-db-connection: jdbc:postgresql://voting-cheetah-postgresql.default.svc.cluster.local:5432/postgres
+  url-db-connection: jdbc:postgresql://postgres-team3-postgresql.default.svc.cluster.local:5432/postgres
