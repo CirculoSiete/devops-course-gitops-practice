@@ -26,6 +26,32 @@ spec:
       containers:
         - name: team2
           image: juliocesarvc/team2-ecommerce:0.0.1
+          env:
+            - name: DB_PWD
+              valueFrom:
+                configMapKeyRef:
+                  name: team2-ecommerce
+                  key: DB_URL
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: team2-ecommerce
+                  key: DB_URL
+            - name: DB_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: team2-ecommerce
+                  key: DB_PWD
+            - name: USER_DB
+              valueFrom:
+                secretKeyRef:
+                  name: team2-ecommerce
+                  key: USER_DB
+            - name: USER_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: team2-ecommerce
+                  key: USER_PWD
           resources:
             requests:
               cpu: 400m
